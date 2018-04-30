@@ -1,0 +1,876 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HomeCareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BloodType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Caretaker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="Date_of_employemnt" Type="date" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Firstname" Type="text" Nullable="false" />
+          <Property Name="Lastname" Type="text" Nullable="false" />
+          <Property Name="Email" Type="text" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OtherInfo" Type="text" />
+          <Property Name="JobTitle" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Handicap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Illness">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="BloodTypeId" Type="int" />
+          <Property Name="Dislikes" Type="text" />
+          <Property Name="Comments" Type="text" />
+        </EntityType>
+        <EntityType Name="PatientInfo_Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="ContactId" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientInfo_Handicap">
+          <Key>
+            <PropertyRef Name="PatientId" />
+            <PropertyRef Name="HandicapId" />
+          </Key>
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="HandicapId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientInfo_Illnes">
+          <Key>
+            <PropertyRef Name="PatientID" />
+            <PropertyRef Name="IllnesId" />
+          </Key>
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="IllnesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientInfo_PersonalContact">
+          <Key>
+            <PropertyRef Name="PersonalContact" />
+            <PropertyRef Name="PatientID" />
+          </Key>
+          <Property Name="PersonalContact" Type="int" Nullable="false" />
+          <Property Name="PatientID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonalContacts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="text" Nullable="false" />
+          <Property Name="Email" Type="text" Nullable="false" />
+          <Property Name="Relation" Type="text" Nullable="false" />
+          <Property Name="OtherInfo" Type="text" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task_PatientInfo">
+          <Key>
+            <PropertyRef Name="Task_id" />
+            <PropertyRef Name="Patient_id" />
+          </Key>
+          <Property Name="Task_id" Type="int" Nullable="false" />
+          <Property Name="Patient_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="text" Nullable="false" />
+          <Property Name="Lastname" Type="text" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="text" Nullable="false" />
+          <Property Name="ContactNumber" Type="int" Nullable="false" />
+          <Property Name="Role_id" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Visit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <Association Name="FK_Caretaker_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Caretaker" Type="Self.Caretaker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Caretaker">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_BloodType">
+          <End Role="BloodType" Type="Self.BloodType" Multiplicity="0..1" />
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo">
+              <PropertyRef Name="BloodTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_Contact_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="1" />
+          <End Role="PatientInfo_Contact" Type="Self.PatientInfo_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo_Contact">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_Contact_PatientInfo">
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="1" />
+          <End Role="PatientInfo_Contact" Type="Self.PatientInfo_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo_Contact">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_Handicap_Handicap">
+          <End Role="Handicap" Type="Self.Handicap" Multiplicity="1" />
+          <End Role="PatientInfo_Handicap" Type="Self.PatientInfo_Handicap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Handicap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo_Handicap">
+              <PropertyRef Name="HandicapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_Handicap_PatientInfo">
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="1" />
+          <End Role="PatientInfo_Handicap" Type="Self.PatientInfo_Handicap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo_Handicap">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_Illnes_Illness">
+          <End Role="Illness" Type="Self.Illness" Multiplicity="1" />
+          <End Role="PatientInfo_Illnes" Type="Self.PatientInfo_Illnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Illness">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo_Illnes">
+              <PropertyRef Name="IllnesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_Illnes_PatientInfo">
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="1" />
+          <End Role="PatientInfo_Illnes" Type="Self.PatientInfo_Illnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo_Illnes">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_PersonalContact_PatientInfo">
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="1" />
+          <End Role="PatientInfo_PersonalContact" Type="Self.PatientInfo_PersonalContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo_PersonalContact">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_PersonalContact_PersonalContacts">
+          <End Role="PersonalContacts" Type="Self.PersonalContacts" Multiplicity="1" />
+          <End Role="PatientInfo_PersonalContact" Type="Self.PatientInfo_PersonalContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalContacts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo_PersonalContact">
+              <PropertyRef Name="PersonalContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_PatientInfo_PatientInfo">
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="1" />
+          <End Role="Task_PatientInfo" Type="Self.Task_PatientInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task_PatientInfo">
+              <PropertyRef Name="Patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_PatientInfo_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Task_PatientInfo" Type="Self.Task_PatientInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task_PatientInfo">
+              <PropertyRef Name="Task_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visit_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Visit" Type="Self.Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Visit">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HomeCareModelStoreContainer">
+          <EntitySet Name="BloodType" EntityType="Self.BloodType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Caretaker" EntityType="Self.Caretaker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Handicap" EntityType="Self.Handicap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Illness" EntityType="Self.Illness" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientInfo" EntityType="Self.PatientInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientInfo_Contact" EntityType="Self.PatientInfo_Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientInfo_Handicap" EntityType="Self.PatientInfo_Handicap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientInfo_Illnes" EntityType="Self.PatientInfo_Illnes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientInfo_PersonalContact" EntityType="Self.PatientInfo_PersonalContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonalContacts" EntityType="Self.PersonalContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task_PatientInfo" EntityType="Self.Task_PatientInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visit" EntityType="Self.Visit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Caretaker_User" Association="Self.FK_Caretaker_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Caretaker" EntitySet="Caretaker" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_BloodType" Association="Self.FK_PatientInfo_BloodType">
+            <End Role="BloodType" EntitySet="BloodType" />
+            <End Role="PatientInfo" EntitySet="PatientInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_Contact_Contact" Association="Self.FK_PatientInfo_Contact_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="PatientInfo_Contact" EntitySet="PatientInfo_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_Contact_PatientInfo" Association="Self.FK_PatientInfo_Contact_PatientInfo">
+            <End Role="PatientInfo" EntitySet="PatientInfo" />
+            <End Role="PatientInfo_Contact" EntitySet="PatientInfo_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_Handicap_Handicap" Association="Self.FK_PatientInfo_Handicap_Handicap">
+            <End Role="Handicap" EntitySet="Handicap" />
+            <End Role="PatientInfo_Handicap" EntitySet="PatientInfo_Handicap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_Handicap_PatientInfo" Association="Self.FK_PatientInfo_Handicap_PatientInfo">
+            <End Role="PatientInfo" EntitySet="PatientInfo" />
+            <End Role="PatientInfo_Handicap" EntitySet="PatientInfo_Handicap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_Illnes_Illness" Association="Self.FK_PatientInfo_Illnes_Illness">
+            <End Role="Illness" EntitySet="Illness" />
+            <End Role="PatientInfo_Illnes" EntitySet="PatientInfo_Illnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_Illnes_PatientInfo" Association="Self.FK_PatientInfo_Illnes_PatientInfo">
+            <End Role="PatientInfo" EntitySet="PatientInfo" />
+            <End Role="PatientInfo_Illnes" EntitySet="PatientInfo_Illnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_PersonalContact_PatientInfo" Association="Self.FK_PatientInfo_PersonalContact_PatientInfo">
+            <End Role="PatientInfo" EntitySet="PatientInfo" />
+            <End Role="PatientInfo_PersonalContact" EntitySet="PatientInfo_PersonalContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_PersonalContact_PersonalContacts" Association="Self.FK_PatientInfo_PersonalContact_PersonalContacts">
+            <End Role="PersonalContacts" EntitySet="PersonalContacts" />
+            <End Role="PatientInfo_PersonalContact" EntitySet="PatientInfo_PersonalContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_User" Association="Self.FK_PatientInfo_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="PatientInfo" EntitySet="PatientInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_PatientInfo_PatientInfo" Association="Self.FK_Task_PatientInfo_PatientInfo">
+            <End Role="PatientInfo" EntitySet="PatientInfo" />
+            <End Role="Task_PatientInfo" EntitySet="Task_PatientInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_PatientInfo_Task" Association="Self.FK_Task_PatientInfo_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Task_PatientInfo" EntitySet="Task_PatientInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visit_User" Association="Self.FK_Visit_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Visit" EntitySet="Visit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HomeCareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BloodType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PatientInfoes" Relationship="Self.FK_PatientInfo_BloodType" FromRole="BloodType" ToRole="PatientInfo" />
+        </EntityType>
+        <EntityType Name="Caretaker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="Date_of_employemnt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Caretaker_User" FromRole="Caretaker" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OtherInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PatientInfoes" Relationship="Self.PatientInfo_Contact" FromRole="Contact" ToRole="PatientInfo" />
+        </EntityType>
+        <EntityType Name="Handicap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PatientInfoes" Relationship="Self.PatientInfo_Handicap" FromRole="Handicap" ToRole="PatientInfo" />
+        </EntityType>
+        <EntityType Name="Illness">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PatientInfoes" Relationship="Self.PatientInfo_Illnes" FromRole="Illness" ToRole="PatientInfo" />
+        </EntityType>
+        <EntityType Name="PatientInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="BloodTypeId" Type="Int32" />
+          <Property Name="Dislikes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BloodType" Relationship="Self.FK_PatientInfo_BloodType" FromRole="PatientInfo" ToRole="BloodType" />
+          <NavigationProperty Name="User" Relationship="Self.FK_PatientInfo_User" FromRole="PatientInfo" ToRole="User" />
+          <NavigationProperty Name="Contacts" Relationship="Self.PatientInfo_Contact" FromRole="PatientInfo" ToRole="Contact" />
+          <NavigationProperty Name="Handicaps" Relationship="Self.PatientInfo_Handicap" FromRole="PatientInfo" ToRole="Handicap" />
+          <NavigationProperty Name="Illnesses" Relationship="Self.PatientInfo_Illnes" FromRole="PatientInfo" ToRole="Illness" />
+          <NavigationProperty Name="PersonalContacts" Relationship="Self.PatientInfo_PersonalContact" FromRole="PatientInfo" ToRole="PersonalContacts" />
+          <NavigationProperty Name="Tasks" Relationship="Self.Task_PatientInfo" FromRole="PatientInfo" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="PersonalContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Relation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OtherInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PatientInfoes" Relationship="Self.PatientInfo_PersonalContact" FromRole="PersonalContacts" ToRole="PatientInfo" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PatientInfoes" Relationship="Self.Task_PatientInfo" FromRole="Task" ToRole="PatientInfo" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactNumber" Type="Int32" Nullable="false" />
+          <Property Name="Role_id" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Caretakers" Relationship="Self.FK_Caretaker_User" FromRole="User" ToRole="Caretaker" />
+          <NavigationProperty Name="PatientInfoes" Relationship="Self.FK_PatientInfo_User" FromRole="User" ToRole="PatientInfo" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Visits" Relationship="HomeCareModel.FK_Visit_User" FromRole="User" ToRole="Visit" />
+        </EntityType>
+        <EntityType Name="Visit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="User" Relationship="HomeCareModel.FK_Visit_User" FromRole="Visit" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_PatientInfo_BloodType">
+          <End Role="BloodType" Type="Self.BloodType" Multiplicity="0..1" />
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo">
+              <PropertyRef Name="BloodTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Caretaker_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Caretaker" Type="Self.Caretaker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Caretaker">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInfo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PatientInfo_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="*" />
+        </Association>
+        <Association Name="PatientInfo_Handicap">
+          <End Role="Handicap" Type="Self.Handicap" Multiplicity="*" />
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="*" />
+        </Association>
+        <Association Name="PatientInfo_Illnes">
+          <End Role="Illness" Type="Self.Illness" Multiplicity="*" />
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="*" />
+        </Association>
+        <Association Name="PatientInfo_PersonalContact">
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="*" />
+          <End Role="PersonalContacts" Type="Self.PersonalContact" Multiplicity="*" />
+        </Association>
+        <Association Name="Task_PatientInfo">
+          <End Role="PatientInfo" Type="Self.PatientInfo" Multiplicity="*" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MyDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BloodTypes" EntityType="Self.BloodType" />
+          <EntitySet Name="Caretakers" EntityType="Self.Caretaker" />
+          <EntitySet Name="Contacts" EntityType="Self.Contact" />
+          <EntitySet Name="Handicaps" EntityType="Self.Handicap" />
+          <EntitySet Name="Illnesses" EntityType="Self.Illness" />
+          <EntitySet Name="PatientInfoes" EntityType="Self.PatientInfo" />
+          <EntitySet Name="PersonalContacts" EntityType="Self.PersonalContact" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Visits" EntityType="Self.Visit" />
+          <AssociationSet Name="FK_PatientInfo_BloodType" Association="Self.FK_PatientInfo_BloodType">
+            <End Role="BloodType" EntitySet="BloodTypes" />
+            <End Role="PatientInfo" EntitySet="PatientInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Caretaker_User" Association="Self.FK_Caretaker_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Caretaker" EntitySet="Caretakers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInfo_User" Association="Self.FK_PatientInfo_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PatientInfo" EntitySet="PatientInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="PatientInfo_Contact" Association="Self.PatientInfo_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="PatientInfo" EntitySet="PatientInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="PatientInfo_Handicap" Association="Self.PatientInfo_Handicap">
+            <End Role="Handicap" EntitySet="Handicaps" />
+            <End Role="PatientInfo" EntitySet="PatientInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="PatientInfo_Illnes" Association="Self.PatientInfo_Illnes">
+            <End Role="Illness" EntitySet="Illnesses" />
+            <End Role="PatientInfo" EntitySet="PatientInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="PatientInfo_PersonalContact" Association="Self.PatientInfo_PersonalContact">
+            <End Role="PatientInfo" EntitySet="PatientInfoes" />
+            <End Role="PersonalContacts" EntitySet="PersonalContacts" />
+          </AssociationSet>
+          <AssociationSet Name="Task_PatientInfo" Association="Self.Task_PatientInfo">
+            <End Role="PatientInfo" EntitySet="PatientInfoes" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visit_User" Association="HomeCareModel.FK_Visit_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Visit" EntitySet="Visits" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Visit_User">
+          <End Type="HomeCareModel.User" Role="User" Multiplicity="1" />
+          <End Type="HomeCareModel.Visit" Role="Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Visit">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HomeCareModelStoreContainer" CdmEntityContainer="MyDbContext">
+          <EntitySetMapping Name="BloodTypes">
+            <EntityTypeMapping TypeName="HomeCareModel.BloodType">
+              <MappingFragment StoreEntitySet="BloodType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Caretakers">
+            <EntityTypeMapping TypeName="HomeCareModel.Caretaker">
+              <MappingFragment StoreEntitySet="Caretaker">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Date_of_employemnt" ColumnName="Date_of_employemnt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="HomeCareModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="OtherInfo" ColumnName="OtherInfo" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Handicaps">
+            <EntityTypeMapping TypeName="HomeCareModel.Handicap">
+              <MappingFragment StoreEntitySet="Handicap">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Illnesses">
+            <EntityTypeMapping TypeName="HomeCareModel.Illness">
+              <MappingFragment StoreEntitySet="Illness">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientInfoes">
+            <EntityTypeMapping TypeName="HomeCareModel.PatientInfo">
+              <MappingFragment StoreEntitySet="PatientInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BloodTypeId" ColumnName="BloodTypeId" />
+                <ScalarProperty Name="Dislikes" ColumnName="Dislikes" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonalContacts">
+            <EntityTypeMapping TypeName="HomeCareModel.PersonalContact">
+              <MappingFragment StoreEntitySet="PersonalContacts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="OtherInfo" ColumnName="OtherInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="HomeCareModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HomeCareModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="HomeCareModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HomeCareModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visits">
+            <EntityTypeMapping TypeName="HomeCareModel.Visit">
+              <MappingFragment StoreEntitySet="Visit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PatientInfo_Contact" TypeName="HomeCareModel.PatientInfo_Contact" StoreEntitySet="PatientInfo_Contact">
+            <EndProperty Name="Contact">
+              <ScalarProperty Name="Id" ColumnName="ContactId" />
+            </EndProperty>
+            <EndProperty Name="PatientInfo">
+              <ScalarProperty Name="Id" ColumnName="PatientId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PatientInfo_Handicap" TypeName="HomeCareModel.PatientInfo_Handicap" StoreEntitySet="PatientInfo_Handicap">
+            <EndProperty Name="Handicap">
+              <ScalarProperty Name="Id" ColumnName="HandicapId" />
+            </EndProperty>
+            <EndProperty Name="PatientInfo">
+              <ScalarProperty Name="Id" ColumnName="PatientId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PatientInfo_Illnes" TypeName="HomeCareModel.PatientInfo_Illnes" StoreEntitySet="PatientInfo_Illnes">
+            <EndProperty Name="Illness">
+              <ScalarProperty Name="Id" ColumnName="IllnesId" />
+            </EndProperty>
+            <EndProperty Name="PatientInfo">
+              <ScalarProperty Name="Id" ColumnName="PatientID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PatientInfo_PersonalContact" TypeName="HomeCareModel.PatientInfo_PersonalContact" StoreEntitySet="PatientInfo_PersonalContact">
+            <EndProperty Name="PatientInfo">
+              <ScalarProperty Name="Id" ColumnName="PatientID" />
+            </EndProperty>
+            <EndProperty Name="PersonalContacts">
+              <ScalarProperty Name="Id" ColumnName="PersonalContact" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Task_PatientInfo" TypeName="HomeCareModel.Task_PatientInfo" StoreEntitySet="Task_PatientInfo">
+            <EndProperty Name="PatientInfo">
+              <ScalarProperty Name="Id" ColumnName="Patient_id" />
+            </EndProperty>
+            <EndProperty Name="Task">
+              <ScalarProperty Name="Id" ColumnName="Task_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

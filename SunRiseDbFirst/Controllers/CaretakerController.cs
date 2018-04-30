@@ -17,8 +17,16 @@ namespace SunRiseDbFirst.Controllers
         // GET: Caretaker
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Role);
-            return View(users.ToList());
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                User user = db.Users.Find(Session["Id"]);
+
+                return View(user);
+            }
         }
 
         // GET: Caretaker/Details/5

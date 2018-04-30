@@ -17,8 +17,17 @@ namespace SunRiseDbFirst.Controllers
         // GET: Patient
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Role);
-            return View(users.ToList());
+            if (Session["Id"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                User user = db.Users.Find(Session["Id"]);
+
+                return View(user);
+            }
+            
         }
 
         // GET: Patient/Details/5

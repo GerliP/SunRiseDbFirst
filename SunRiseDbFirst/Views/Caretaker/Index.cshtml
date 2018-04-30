@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SunRiseDbFirst.Models.User>
+﻿@model SunRiseDbFirst.Models.User
 
 @{
     ViewBag.Title = "Index";
@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -38,38 +35,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Firstname)
+            @Html.DisplayFor(model => model.Firstname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Lastname)
+            @Html.DisplayFor(model => model.Lastname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
+            @Html.DisplayFor(model => model.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Password)
+            @Html.DisplayFor(model => model.Password)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Address)
+            @Html.DisplayFor(model => model.Address)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ContactNumber)
+            @Html.DisplayFor(model => model.ContactNumber)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Gender)
+            @Html.DisplayFor(model => model.Gender)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Role.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(model => model.Role.Name)
         </td>
     </tr>
-}
 
 </table>

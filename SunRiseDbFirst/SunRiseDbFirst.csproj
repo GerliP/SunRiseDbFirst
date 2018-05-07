@@ -189,6 +189,7 @@
     <Compile Include="Models\Illness.cs">
       <DependentUpon>HomeCare.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Model.cs" />
     <Compile Include="Models\PatientInfo.cs">
       <DependentUpon>HomeCare.tt</DependentUpon>
     </Compile>

@@ -56,7 +56,7 @@ namespace SunRiseDbFirst.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            
             ViewBag.Role_id = new SelectList(db.Roles, "Id", "Name", user.Role_id);
             return View(user);
         }
